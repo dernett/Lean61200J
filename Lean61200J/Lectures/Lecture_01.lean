@@ -62,14 +62,14 @@ def Prop3_print_table : IO Unit := do
 #eval Prop3_print_table
 
 def Prop4 : Prop := ¬ ∃ a b c d : ℕ+, a ^ 4 + b ^ 4 + c ^ 4 = d ^ 4
-theorem Prop4_true : ¬ Prop4 := by
+theorem Prop4_false : ¬ Prop4 := by
   unfold Prop4
   push_neg
   use 95800, 217519, 414560, 422481
   decide
 
 def Prop5 : Prop := ∃ a b c d : ℕ+, a ^ 4 + b ^ 4 + c ^ 4 = d ^ 4
-example : Prop5 := by unfold Prop5; by_contra h; apply Prop4_true; exact h
+example : Prop5 := by unfold Prop5; by_contra h; apply Prop4_false; exact h
 
 def Prop6 : Prop := ¬ ∃ x y z : ℕ+, 313 * (x^3 + y^3) = z ^ 3
 example : ¬ Prop6 := sorry
@@ -104,7 +104,7 @@ end
 section
 
 variable (U : Type)
-def A : Finset Nat := {6, 1, 2, 0}
+def A : Finset ℕ := {6, 1, 2, 0}
 #check ℕ
 #check ℤ
 #check (∅ : Set U)
@@ -128,7 +128,7 @@ example : ({1, 2} : Finset ℕ) ∉ A := sorry
 #eval {0, 1, 2, 6} ⊆ A
 
 /- set-builder notation -/
-#check {n : Nat | Prime n}
+#check {n : ℕ | Prime n}
 
 /- Doesn't work: Sets must have same type. -/
 /-

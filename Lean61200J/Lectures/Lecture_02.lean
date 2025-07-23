@@ -1,4 +1,9 @@
-import Mathlib
+import Mathlib.Algebra.GCDMonoid.Nat
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.RCLike.Basic
+import Mathlib.Data.Int.Star
+import Mathlib.Data.Real.Irrational
+import Mathlib.Tactic.Rify
 
 /- Section 1. Logical Deduction -/
 section
@@ -132,8 +137,6 @@ theorem Thm1 : Irrational √2 := by
 end
 /- Section 5. Proof by Induction -/
 section
-
-#check Nat.mul_div_cancel
 
 -- We sum up rationals instead of Nats to make the algebra simpler
 theorem Thm2 : ∀ n : ℕ, ∑ i ∈ Finset.range (n + 1), (i : ℚ) = n * (n + 1) / 2 := by
