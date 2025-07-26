@@ -89,7 +89,7 @@ end
 /- Section 3. Proof by Contradiction -/
 section
 
-theorem Thm1 : Irrational √2 := by
+theorem Theorem1 : Irrational √2 := by
   unfold Irrational
   -- Assume for sake of contradiction that 2 ∈ Q.
   by_contra h_exists_rat
@@ -139,14 +139,14 @@ end
 section
 
 -- We sum up rationals instead of Nats to make the algebra simpler
-theorem Thm2 : ∀ n : ℕ, ∑ i ∈ Finset.range (n + 1), (i : ℚ) = n * (n + 1) / 2 := by
+theorem Theorem2 : ∀ n : ℕ, ∑ i ∈ Finset.range (n + 1), (i : ℚ) = n * (n + 1) / 2 := by
   intro n
   induction n with
   | zero => simp
   | succ k ih =>
-      rw [Finset.sum_range_succ, ih]
-      field_simp
-      ring
+    rw [Finset.sum_range_succ, ih]
+    field_simp
+    ring
 
 /- Strengthening the Induction Hypothesis -/
 /- TODO: Formalize what it means for a grid to be tiled with L-trominoes.  -/

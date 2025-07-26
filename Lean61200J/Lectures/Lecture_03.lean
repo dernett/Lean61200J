@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.Normed.Field.Lemmas
+import Mathlib.Data.Sym.Sym2
 
 /- Section 1. -/
 section
@@ -40,15 +42,15 @@ abbrev E := Sym2 V
 abbrev Assignment := E → Mutual
 
 @[simp]
-theorem ne_red_iff_eq_blue {m : Mutual} : m ≠ Mutual.Friend ↔ m = Mutual.Stranger := by
+theorem ne_friend_iff_eq_stranger {m : Mutual} : m ≠ Mutual.Friend ↔ m = Mutual.Stranger := by
   cases m <;> simp
 
 @[simp]
-theorem ne_blue_iff_eq_red {m : Mutual} : m ≠ Mutual.Stranger ↔  m = Mutual.Friend := by
+theorem ne_stranger_iff_eq_friend {m : Mutual} : m ≠ Mutual.Stranger ↔  m = Mutual.Friend := by
   cases m <;> simp
 
 @[simp]
-theorem red_or_blue {m : Mutual} : (m = Mutual.Friend) ∨ (m = Mutual.Stranger) := by
+theorem friend_or_stranger {m : Mutual} : (m = Mutual.Friend) ∨ (m = Mutual.Stranger) := by
   cases m <;> simp
 
 /- Is there a triangle where `C` colors all edges color `c` -/
