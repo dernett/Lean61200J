@@ -10,3 +10,4 @@ This repository aims to formalize [MIT's 6.1200J course](https://ocw.mit.edu/cou
 
 - Lecture 1: Done
 - Lecture 2: Missing L-trominoe problem
+- Lecture 3: Missing "Beats ordering" problem
