@@ -53,7 +53,10 @@ theorem ne_stranger_iff_eq_friend {m : Mutual} : m ≠ Mutual.Stranger ↔  m = 
 theorem friend_or_stranger {m : Mutual} : (m = Mutual.Friend) ∨ (m = Mutual.Stranger) := by
   cases m <;> simp
 
-/- Is there a triangle where `C` colors all edges color `c` -/
+/-
+   Is there a triangle of three distinct people `a b c` for which
+   they are all assigned by `A` to the same mutual status `m`?
+  -/
 def HasTriangle (A : Assignment) (m : Mutual) : Prop :=
   ∃ a b c : V, a ≠ b ∧ a ≠ c ∧ b ≠ c ∧
     A s(a, b) = m ∧ A s(a, c) = m ∧ A s(b, c) = m
