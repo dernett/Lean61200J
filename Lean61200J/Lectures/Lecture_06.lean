@@ -67,3 +67,47 @@ theorem H_approx_ln : Tilde (fun n ↦ (H n : ℝ)) (fun x ↦ Real.log x) := by
     apply tendsto_inv_atTop_zero.comp at this
     unfold Function.comp at this
     simp [*] at *
+
+/- TODO: Move this into separate file -/
+
+def PReal := { x : ℝ // 0 < x }
+notation "ℝ+" => PReal
+
+@[coe]
+def PReal.val : ℝ+ → ℝ := Subtype.val
+
+instance coePRealReal : Coe ℝ+ ℝ :=
+  ⟨PReal.val⟩
+
+@[simp]
+theorem PReal.pos (x : ℝ+) : 0 < (x : ℝ) :=
+  x.2
+
+@[simp]
+theorem PReal.ne_zero (x : ℝ+) : (x : ℝ) ≠ 0 :=
+  x.2.ne'
+
+@[simp]
+theorem PReal.zero_le (x : ℝ+) : (0 : ℝ) ≤ x :=
+  le_of_lt x.pos
+
+def O (g : ℕ+ → ℝ+) : Set (ℕ+ → ℝ) :=
+  { f : ℕ+ → ℝ | ∃ c : ℝ, ∀ᶠ x in atTop, |f x| ≤ c * g x }
+
+theorem limit_O {f : ℕ+ → ℝ} {g : ℕ+ → ℝ+}
+    (h_ex_lim : ∃ l : ℝ, Tendsto (fun x ↦ |f x| / g x) atTop (𝓝 l)) :
+    f ∈ O g := by
+  obtain ⟨l, h_lim⟩ := h_ex_lim
+  use l + 1
+  rw [Metric.tendsto_atTop] at h_lim
+  specialize h_lim 1 (by simp)
+  obtain ⟨M, hM⟩ := h_lim
+  rw [eventually_atTop]
+  refine ⟨M, fun x hx ↦ ?_⟩
+  specialize hM x hx
+  rw [Real.dist_eq, abs_sub_lt_iff] at hM
+  replace hM : |f x| / g x < l + 1 := by linarith
+  exact calc
+    |f x|
+      = |f x| / g x * g x := by field_simp
+    _ ≤ (l + 1) * g x := by bound
